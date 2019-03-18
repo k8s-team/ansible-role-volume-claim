@@ -1,0 +1,18 @@
+---
+- name: Ensures {{ destFolder }} dir exists
+  file:
+    path: "{{ destFolder }}"
+    state: directory
+
+- set_fact:
+    volume_claim_file: "{{ destFolder }}/claim-{{ storageClassName }}-{{ metaName }}-{{ storage }}.yaml"
+
+- name: Create volume claim file {{ volume_claim_file }}
+  template:
+    src: volume-claim.yaml
+    dest: "{{ volume_claim_file }}"
+
+- name: Install volume claim
+  k8s:
+    state: present
+    src: "{{ volume_claim_file }}"

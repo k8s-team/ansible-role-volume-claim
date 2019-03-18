@@ -1,0 +1,14 @@
+---
+
+- set_fact:
+    volume_claim_file: "{{ destFolder }}/claim-{{ storageClassName }}-{{ metaName }}-{{ storage }}.yaml"
+
+- name: Unnstall volume claim
+  k8s:
+    state: absent
+    src: "{{ volume_claim_file }}"
+
+- name: Remove volume claim file {{ volume_claim_file }}
+  file:
+    path: "{{ volume_claim_file }}"
+    state: absent

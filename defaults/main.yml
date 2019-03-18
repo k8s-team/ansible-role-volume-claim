@@ -1,0 +1,11 @@
+---
+# defaults file for volume-claim
+
+state: present
+destFolder: "{{ ansible_env.HOME }}/.k8s-team/pvc"
+
+metaName: pvc
+namespace: default
+storageClassName: storageClassName
+accessModes: [ReadWriteOnce, ]
+storage: 1Gi
